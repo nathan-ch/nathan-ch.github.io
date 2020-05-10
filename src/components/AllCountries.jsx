@@ -15,14 +15,19 @@ const AllCountries = ({ countryChoice , data }) => {
     const options = data.map(d => <Option key={d.value}>{d.text}</Option>);
       
     return (
-        <div className="pace-align-container space-align-block">
+        <div>
             <Select
-            mode="multiple"
-            style={{ width: '100%' }}
-            placeholder="select one country"
-            defaultValue={['france']}
+            style={{ width: '30%' }}
+            placeholder="sélectionnez un pays"
+            defaultValue={['France']}
             onChange={countryChoice}
             optionLabelProp="label"
+
+            showSearch
+            optionFilterProp="children"
+            filterOption={(input, option) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
           >
             {options}
           </Select>

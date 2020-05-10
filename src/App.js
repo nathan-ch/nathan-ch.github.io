@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import "antd/dist/antd.css";
 import Stats from './components/stats';
-import { Space, Row, Col, Layout, Typography } from 'antd';
-import Chart from './components/Chart';
+import { Space, Row, Col, Layout, Typography, DatePicker } from 'antd';
+import CumuledChart from './components/CumuledChart';
 import moment from 'moment'
 import localization from 'moment/locale/fr';
 import AllCountries from './components/AllCountries';
 import DateChoice from './components/DatePicker';
+import DailyChart from './components/DailyChart';
+import './App.css';
 moment.updateLocale('fr', localization);
 
 const App = () => {
-  const [chartData, setChartData] = useState([]);
+  const [cumuledChartData, setCumuledChartData] = useState([]);
+  const [dailyChartData, setDailyChartData] = useState([]);
   const [confirmed, setConfirmed] = useState();
   const [deaths, setDeaths] = useState();
   const [recovered, setRecovered] = useState();
   const [country, setCountry] = useState("france");
   const [countries, setCountries] = useState([])
-  const [displayChart, setDisplayChart] = useState(false)
-  const [displayDailyStats, setDisplayDailyStats] = useState(false)
-  const [dailyStat, setDailyStat] = useState([]);
   const [date, setDate] = useState(moment().subtract(2, 'days').format("YYYY-MM-DD"))
   const [dailyConfirmed, setDailyConfirmed] = useState();
   const [dailyDeaths, setDailyDeaths] = useState();
@@ -47,7 +47,7 @@ const App = () => {
     setConfirmed("chargement...")
     setDeaths("chargement...")
     setRecovered("chargement...")
-    setChartData([])
+    setCumuledChartData([])
     const URL = `https://api.covid19api.com/countries`;
     fetch(URL)
     .then((response) => response.json())
@@ -71,8 +71,11 @@ const App = () => {
 
   const fetchStats = () =>{
     if(country === "global"){
-      setDisplayChart(false)
-      setChartData([])
+      setCumuledChartData([])
+      setDailyChartData([])
+      setDailyConfirmed("Chargement...")
+      setDailyDeaths("Chargement...")
+      setDailyRecovered("Chargement...")
       const urlGlobal = `https://api.covid19api.com/world/total`;
         fetch(urlGlobal)
         .then((response) => response.json())
@@ -91,25 +94,38 @@ const App = () => {
           setConfirmed(lastDay.Confirmed)
           setDeaths(lastDay.Deaths)
           setRecovered(lastDay.Recovered)
-          let array=[]
+          let cumuledArray=[]
+          let dailyArray=[]
           for (let i = 10; i < response.length; i++) {
             let day = response[i]
-            let data = {}
-            data["date"]=(moment(day.Date).format('l'))
-            data["confirmés"] = day.Confirmed
-            data["Morts"]=day.Deaths
-            data["guéris"]=day.Recovered
-            array.push(data)
-            i++
+            let dayBefore = response[i-1]
+            // Data for cumuled chart
+            let cumuledData = {}
+            cumuledData["date"]=(moment(day.Date).format('l'))
+            cumuledData["confirmés"] = day.Confirmed
+            cumuledData["Morts"]=day.Deaths
+            cumuledData["guéris"]=day.Recovered
+            cumuledArray.push(cumuledData)
+
+            // Data for daily chart
+            let dailyData = {}
+            dailyData["date"]=(moment(day.Date).format('l'))
+            dailyData["confirmés"] = day.Confirmed - dayBefore.Confirmed
+            dailyData["Morts"]=  day.Deaths - dayBefore.Deaths
+            dailyData["guéris"]= day.Recovered - dayBefore.Recovered
+            dailyArray.push(dailyData)
         }
-        setChartData(array)
-        setDisplayChart(true)
+        setCumuledChartData(cumuledArray)
+        setDailyChartData(dailyArray)
       })
       .catch((error) => console.error(error));
     }
   }
 
   const fetchDay = () =>{
+    setDailyConfirmed("Chargement...")
+    setDailyDeaths("Chargement...")
+    setDailyRecovered("Chargement...")
     let dayBefore = moment(date).subtract(1, 'days').format("YYYY-MM-DD");
     const urlCountryDay = `https://api.covid19api.com/total/country/${country}?from=${dayBefore}&to=${date}T01:00:00Z`;
     console.log(urlCountryDay);
@@ -118,9 +134,7 @@ const App = () => {
         .then((response) => {
           let day = response
           if(!day[0].Confirmed){
-            setDisplayDailyStats(false)
           }else{
-            setDisplayDailyStats(true)
             setDailyConfirmed(day[1].Confirmed - day[0].Confirmed)
             setDailyDeaths(day[1].Deaths - day[0].Deaths)
             setDailyRecovered(day[1].Recovered - day[0].Recovered)
@@ -138,28 +152,36 @@ const App = () => {
   return (
     <div className="App">
        <Layout>
+         <Row justify="space-around" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+           <Col> 
+            <Title type="secondary" level={1}>Statistiques sur l'épidémie du Covid-19</Title>
+            <AllCountries countryChoice={countryChoice} data={countries} />
+           </Col>
+         </Row>
         <Content
             className="site-layout-background"
             style={{
               padding: 24,
-              margin: 0,
+              margin: 5,
               minHeight: 280,
             }}>
-            <Row justify="space-around" align="middle" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-                <Col  className="gutter-row" span={4}>
-                    <div className="pace-align-container space-align-block">
-                      <Title level={3}>Depuis le début</Title>
+            <Row type="flex" align="middle" align-items="center" justify="space-around" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                <Col className="gutter-row" span={4}>
+                    <div>
+                      <Title type="secondary" level={4}>Depuis le début de la pandémie</Title>
                       <Stats confirmed={confirmed} deaths={deaths} recovered={recovered} />
                     </div>
                 </Col>
-                <Col  className="gutter-row" span={16}>
-                  <AllCountries countryChoice={countryChoice} data={countries} />
-                  {displayChart && <Chart data={chartData} />}
-                </Col>
                 <Col  className="gutter-row" span={4}>
-                  <Title level={3}>Ce jour-là</Title>
-                  <DateChoice dayChoice={dayChoice} />
-                  {displayDailyStats && <Stats confirmed={dailyConfirmed} deaths={dailyDeaths} recovered={dailyRecovered} />}
+                  <Title type="secondary" level={4}>Ce jour-là</Title>
+                  <DatePicker defaultValue={moment().subtract(2, 'days')} onChange={dayChoice} />
+                  <Stats confirmed={dailyConfirmed} deaths={dailyDeaths} recovered={dailyRecovered} />
+                </Col>
+                <Col className="gutter-row" span={16}>
+                  <Title type="secondary" level={4}>Courbe d'évolution cumulée </Title>
+                  <CumuledChart data={cumuledChartData} />
+                  <Title type="secondary" level={4}>Nombre de mort par jour </Title>
+                  <DailyChart data={dailyChartData} />
                 </Col>
             </Row>    
           </Content>

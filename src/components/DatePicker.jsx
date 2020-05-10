@@ -5,22 +5,15 @@ import moment from 'moment'
 
 const DateChoice = ({dayChoice}) => {
 
+const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY'];
+
     return(    
-        <div>
-                <DatePicker
-                    onChange={dayChoice}
-                    defaultValue={moment().subtract(2, 'days')}
-                    dateRender={current => {
-                    const style = {};
-                    return (
-                        <div className="ant-picker-cell-inner" style={style}>
-                        {current.date()}
-                        </div>
-                    );
-                    }}
-                />
-        </div>
+            <div>
+                <DatePicker 
+                defaultValue={moment('01/01/2015', dateFormatList[0])} format={dateFormatList} onChange={dayChoice} />
+            </div>
     );
 }
+
 
 export default DateChoice

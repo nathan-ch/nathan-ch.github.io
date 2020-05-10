@@ -6,7 +6,7 @@ const Stats = ({confirmed, deaths, recovered}) => {
     
     return(
           <div className="site-statistic-demo-card">
-        <Row gutter={[32, 32]} justify="space-around" align="middle">
+        <Row gutter={[64, 64]} justify="space-around" align="middle">
           <Col className="gutter-row" span={24}>
             <Card style={{ width: "65%" }}>
               <Statistic
