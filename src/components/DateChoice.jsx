@@ -10,7 +10,7 @@ const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY'];
     return(    
             <div>
                 <DatePicker 
-                defaultValue={moment('01/01/2015', dateFormatList[0])} format={dateFormatList} onChange={dayChoice} />
+                defaultValue={moment().subtract(2, 'days')} format={dateFormatList} onChange={dayChoice} />
             </div>
     );
 }

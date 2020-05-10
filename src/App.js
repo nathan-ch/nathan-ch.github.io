@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import "antd/dist/antd.css";
 import Stats from './components/stats';
-import { Space, Row, Col, Layout, Typography, DatePicker } from 'antd';
+import { Space, Row, Col, Layout, Typography, DatePicker, Spin } from 'antd';
 import CumuledChart from './components/CumuledChart';
 import moment from 'moment'
 import localization from 'moment/locale/fr';
 import AllCountries from './components/AllCountries';
-import DateChoice from './components/DatePicker';
+import DateChoice from './components/DateChoice';
 import DailyChart from './components/DailyChart';
 import './App.css';
 moment.updateLocale('fr', localization);
@@ -44,9 +44,9 @@ const App = () => {
   }
 
   const fetchCountries = () =>{
-    setConfirmed("chargement...")
-    setDeaths("chargement...")
-    setRecovered("chargement...")
+    setConfirmed("")
+    setDeaths("")
+    setRecovered("")
     setCumuledChartData([])
     const URL = `https://api.covid19api.com/countries`;
     fetch(URL)
@@ -73,9 +73,12 @@ const App = () => {
     if(country === "global"){
       setCumuledChartData([])
       setDailyChartData([])
-      setDailyConfirmed("Chargement...")
-      setDailyDeaths("Chargement...")
-      setDailyRecovered("Chargement...")
+      setDailyConfirmed("")
+      setDailyDeaths("")
+      setDailyRecovered("")
+      setConfirmed("")
+      setDeaths("")
+      setRecovered("")
       const urlGlobal = `https://api.covid19api.com/world/total`;
         fetch(urlGlobal)
         .then((response) => response.json())
@@ -86,6 +89,12 @@ const App = () => {
       })
       .catch((error) => console.error(error));
     }else{
+        setDailyConfirmed("")
+        setDailyDeaths("")
+        setDailyRecovered("")
+        setConfirmed("")
+        setDeaths("")
+        setRecovered("")
         const urlCountry = `https://api.covid19api.com/total/country/${country}`;
         fetch(urlCountry)
         .then((response) => response.json())
@@ -123,9 +132,9 @@ const App = () => {
   }
 
   const fetchDay = () =>{
-    setDailyConfirmed("Chargement...")
-    setDailyDeaths("Chargement...")
-    setDailyRecovered("Chargement...")
+    setDailyConfirmed("")
+    setDailyDeaths("")
+    setDailyRecovered("")
     let dayBefore = moment(date).subtract(1, 'days').format("YYYY-MM-DD");
     const urlCountryDay = `https://api.covid19api.com/total/country/${country}?from=${dayBefore}&to=${date}T01:00:00Z`;
     console.log(urlCountryDay);
@@ -156,6 +165,7 @@ const App = () => {
            <Col> 
             <Title type="secondary" level={1}>Statistiques sur l'épidémie du Covid-19</Title>
             <AllCountries countryChoice={countryChoice} data={countries} />
+            <DateChoice dayChoice={dayChoice} />
            </Col>
          </Row>
         <Content
@@ -168,13 +178,12 @@ const App = () => {
             <Row type="flex" align="middle" align-items="center" justify="space-around" gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                 <Col className="gutter-row" span={4}>
                     <div>
-                      <Title type="secondary" level={4}>Depuis le début de la pandémie</Title>
+                      <Title type="secondary" level={4}>Depuis le début</Title>
                       <Stats confirmed={confirmed} deaths={deaths} recovered={recovered} />
                     </div>
                 </Col>
                 <Col  className="gutter-row" span={4}>
-                  <Title type="secondary" level={4}>Ce jour-là</Title>
-                  <DatePicker defaultValue={moment().subtract(2, 'days')} onChange={dayChoice} />
+                  <Title type="secondary" level={4}>Le {moment(date).format("dddd DD MMMM YYYY")}</Title>
                   <Stats confirmed={dailyConfirmed} deaths={dailyDeaths} recovered={dailyRecovered} />
                 </Col>
                 <Col className="gutter-row" span={16}>
