@@ -17,7 +17,7 @@ const AllCountries = ({ countryChoice , data }) => {
     return (
         <div>
             <Select
-            style={{ width: '30%' }}
+            style={{ width: '80%' }}
             placeholder="sélectionnez un pays"
             defaultValue={['France']}
             onChange={countryChoice}
