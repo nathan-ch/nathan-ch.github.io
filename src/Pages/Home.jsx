@@ -9,6 +9,7 @@ import AllCountries from '../components/AllCountries';
 import DateChoice from '../components/DateChoice';
 import DailyChart from '../components/DailyChart';
 import 'bootstrap/dist/css/bootstrap.css';
+import {CaretDownOutlined} from '@ant-design/icons';
 
 import {
     BrowserRouter as Router,
@@ -164,16 +165,17 @@ const Home = () => {
 
   return (
     <div className="text-center mx-auto" style={{maxWidth:"1800px"}}>
-      <div className="container-fluid">
-        <div className="jumbotron" style={{backgroundColor:"#F0F2F5"}}>
+      {/* <div className="container-fluid">
+        <div className="jumbotron" style={{backgroundColor:"#F0F2F5"}}> */}
             <h1 className="display-4 text-danger">Statistiques sur le Covid-19</h1>
-            <hr className="my-4"></hr>
+            <hr className="my-4" style={{width:"500px"}}></hr>
               <div className="bg-dark pb-3 p-2 mx-auto rounded" style={{width:"20%"}}>
                 <h3 className="text-light">Sélectionnez un pays</h3>
                   <AllCountries countryChoice={countryChoice} data={countries} />
               </div>
-        </div>
-      </div>
+            <hr className="my-4" style={{width:"500px"}}></hr>
+        {/* </div>
+      </div> */}
       <div style={{backgroundColor:"#F0F2F5"}} className="container-fluid">
           <h4 className="text-center mb-4 text-secondary">Chiffres cumulés</h4>
         <div className="row d-flex align-items-center">
@@ -196,7 +198,7 @@ const Home = () => {
         </div>
 
         </div>
-      <Footer>Réalisé par Nathan Chateau</Footer>
+      <Footer>Réalisé par <a href="mailto:nathanchateau@gmail.com">Nathan Chateau</a> </Footer>
       </div>            
   );
 }
