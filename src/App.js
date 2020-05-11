@@ -105,7 +105,7 @@ const App = () => {
           setRecovered(lastDay.Recovered)
           let cumuledArray=[]
           let dailyArray=[]
-          for (let i = 10; i < response.length; i++) {
+          for (let i = 40; i < response.length; i++) {
             let day = response[i]
             let dayBefore = response[i-1]
             // Data for cumuled chart
