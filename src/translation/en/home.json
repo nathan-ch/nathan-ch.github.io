@@ -1,0 +1,12 @@
+{
+    "home.title": "Covid-19 statistics",
+    "home.selecCountry" : "Select a country",
+    "home.titleStatCumuled" : "Cumuled numbers",
+    "home.cardConfirmed" :"Confirmed",
+    "home.cardDeaths" : "Deaths",
+    "home.cardRecovered" : "Recovered",
+    "home.navTitle" : "Home",
+    "home.navInformation" : "Information",
+    "home.navAbout" : "About",
+    "home.madeBy" : "Made with ❤ by"
+}

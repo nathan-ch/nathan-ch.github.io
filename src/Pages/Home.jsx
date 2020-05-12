@@ -10,6 +10,7 @@ import DateChoice from '../components/DateChoice';
 import DailyChart from '../components/DailyChart';
 import 'bootstrap/dist/css/bootstrap.css';
 import {CaretDownOutlined} from '@ant-design/icons';
+import { FormattedMessage } from 'react-intl';
 
 import {
     BrowserRouter as Router,
@@ -165,19 +166,15 @@ const Home = () => {
 
   return (
     <div className="text-center mx-auto" style={{maxWidth:"1800px"}}>
-      {/* <div className="container-fluid">
-        <div className="jumbotron" style={{backgroundColor:"#F0F2F5"}}> */}
-            <h1 className="display-4 text-danger">Statistiques sur le Covid-19</h1>
+            <h1 className="display-4 text-danger"> <FormattedMessage id="home.title" /></h1>
             <hr className="my-4" style={{width:"500px"}}></hr>
               <div className="bg-dark pb-3 p-2 mx-auto rounded" style={{width:"20%"}}>
-                <h3 className="text-light">Sélectionnez un pays</h3>
+                <h3 className="text-light"><FormattedMessage id="home.selecCountry" /></h3>
                   <AllCountries countryChoice={countryChoice} data={countries} />
               </div>
             <hr className="my-4" style={{width:"500px"}}></hr>
-        {/* </div>
-      </div> */}
       <div style={{backgroundColor:"#F0F2F5"}} className="container-fluid">
-          <h4 className="text-center mb-4 text-secondary">Chiffres cumulés</h4>
+          <h4 className="text-center mb-4 text-secondary"><FormattedMessage id="home.titleStatCumuled" /></h4>
         <div className="row d-flex align-items-center">
           <div className="col-md-6">
             <Stats confirmed={confirmed} deaths={deaths} recovered={recovered} />
@@ -198,7 +195,7 @@ const Home = () => {
         </div>
 
         </div>
-      <Footer>Réalisé par <a href="mailto:nathanchateau@gmail.com">Nathan Chateau</a> </Footer>
+      <Footer><FormattedMessage id="home.madeBy" /> <a href="mailto:nathanchateau@gmail.com">Nathan Chateau</a> </Footer>
       </div>            
   );
 }

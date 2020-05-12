@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Statistic, Card, Row, Col, Spin } from 'antd';
 import { IssuesCloseOutlined , InfoCircleOutlined, StopOutlined } from '@ant-design/icons';
+import { FormattedMessage } from 'react-intl';
+
 
 const Stats = ({confirmed, deaths, recovered}) => {
     
@@ -10,7 +12,7 @@ const Stats = ({confirmed, deaths, recovered}) => {
               <Card style={{ width: "80%" }}>
                 {!confirmed && <Spin className="spin" />}
                 {confirmed && <Statistic
-                  title="Cas confirmés"
+                  title={<FormattedMessage id="home.cardConfirmed" />}
                   value={confirmed}
                   precision={0}
                   valueStyle={{ color: '#ef9115' }}
@@ -23,7 +25,7 @@ const Stats = ({confirmed, deaths, recovered}) => {
               <Card style={{ width: "80%" }}>
                 {!deaths && <Spin className="spin" />}
                 {deaths && <Statistic
-                  title="Morts"
+                  title={<FormattedMessage id="home.cardDeaths" />}
                   value={deaths}
                   precision={0}
                   valueStyle={{ color: '#cf1322' }}
@@ -36,7 +38,7 @@ const Stats = ({confirmed, deaths, recovered}) => {
               <Card style={{ width: "80%" }}>
                 {!recovered && <Spin className="spin" />}
                 {recovered && <Statistic
-                  title="Cas guéris"
+                  title={<FormattedMessage id="home.cardRecovered" />}
                   value={recovered}
                   precision={0}
                   valueStyle={{ color: '#3f8600' }}

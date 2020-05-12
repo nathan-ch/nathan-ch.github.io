@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ResponsiveContainer } from 'recharts';
+import { FormattedMessage } from 'react-intl';
+
 
 const CumuledChart = ({data}) => {
 
@@ -12,9 +14,9 @@ const CumuledChart = ({data}) => {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line type="monotone" dot={false} strokeWidth={3} dataKey="confirmés" stroke="#ef9115" />
-            <Line type="monotone" dot={false} strokeWidth={3} dataKey="Morts" stroke="#cf1322" />
-            <Line type="monotone" dot={false} strokeWidth={3} dataKey="guéris" stroke="#3f8600" />
+            <Line type="monotone" dot={false} strokeWidth={3} label={<FormattedMessage id="home.cardConfirmed" />} dataKey="confirmés" stroke="#ef9115" />
+            <Line type="monotone" dot={false} strokeWidth={3} label={<FormattedMessage id="home.cardDeaths" />} dataKey="Morts" stroke="#cf1322" />
+            <Line type="monotone" dot={false} strokeWidth={3} dataKey="guéris" label={<FormattedMessage id="home.cardRecovered" />} stroke="#3f8600" />
           </LineChart>
         </ResponsiveContainer>
       </div>
