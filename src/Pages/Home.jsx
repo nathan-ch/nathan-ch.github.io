@@ -12,6 +12,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {CaretDownOutlined} from '@ant-design/icons';
 import { FormattedMessage } from 'react-intl';
 import { ReactComponent as Research  } from '../images/research.svg';
+import { ReactComponent as Distancing  } from '../images/distancing.svg';
+
 
 import {
     BrowserRouter as Router,
@@ -205,7 +207,9 @@ const Home = () => {
         </div>
 
         </div>
-      <Footer><FormattedMessage id="home.madeBy" /> <a href="mailto:nathanchateau@gmail.com">Nathan Chateau</a> </Footer>
+        <Distancing className="mt-4" width="500" height="auto" />
+      <Footer>
+        <FormattedMessage id="home.madeBy" /> <a href="mailto:nathanchateau@gmail.com">Nathan Chateau</a> </Footer>
       </div>            
   );
 }
