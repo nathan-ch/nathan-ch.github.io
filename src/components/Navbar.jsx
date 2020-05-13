@@ -11,7 +11,7 @@ import {
 
 
 
-const NavBar = ({changeLanguage}) => {
+const NavBar = ({changeLanguage, currentLang}) => {
     
     return(
         <div className="mx-auto" style={{maxWidth:"1800px"}}>
@@ -32,7 +32,7 @@ const NavBar = ({changeLanguage}) => {
                             <Link className="nav-link" to="/apropos"><FormattedMessage id="home.navAbout" /></Link>
                         </li>
                         <li class="nav-Item">
-                            <a className="nav-link" onClick={changeLanguage}>lang  🇫🇷/🇬🇧 </a>
+                            <a className="nav-link" onClick={changeLanguage}>{ currentLang === "en" ?  '🇫🇷' : '🇬🇧'}</a>
                         </li>
                     </ul>
                 </div>

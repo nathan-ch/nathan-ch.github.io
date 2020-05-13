@@ -26,17 +26,27 @@ const messages = {
 const App = () => {
   const [language, setLanguage] = useState('fr');
 
+    useEffect(() => {
+      if(localStorage.getItem('lang')){
+        setLanguage(localStorage.getItem('lang'))
+      }
+    },[]);
+
   const changeLanguage = (e) =>{
     if(language === 'fr'){
       setLanguage('en')
-    }else{setLanguage('fr')}
+      localStorage.setItem('lang', 'en')
+    }else{
+      setLanguage('fr')
+      localStorage.setItem('lang', 'fr')
+    }
   }
 
   return (
     <Router>
     <IntlProvider locale={language} messages={messages[language]}>
     <div className="App">
-      <Navbar changeLanguage={changeLanguage} />
+      <Navbar changeLanguage={changeLanguage} currentLang={language} />
     </div>
     <Switch>
       <Route path="/informations">
