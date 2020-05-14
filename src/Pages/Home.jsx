@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useParams } from 'react';
 import "antd/dist/antd.css";
 import Stats from '../components/stats';
-import { Space, Row, Col, Layout, Typography, DatePicker, Spin } from 'antd';
+import { Layout } from 'antd';
 import CumuledChart from '../components/CumuledChart';
 import moment from 'moment'
 import localization from 'moment/locale/fr';
@@ -9,18 +9,10 @@ import AllCountries from '../components/AllCountries';
 import DateChoice from '../components/DateChoice';
 import DailyChart from '../components/DailyChart';
 import 'bootstrap/dist/css/bootstrap.css';
-import {CaretDownOutlined} from '@ant-design/icons';
 import { FormattedMessage } from 'react-intl';
 import { ReactComponent as Research  } from '../images/research.svg';
 import { ReactComponent as Distancing  } from '../images/distancing.svg';
 
-
-import {
-    BrowserRouter as Router,
-    Route,
-    Switch,
-    Link
-  } from "react-router-dom";
 moment.updateLocale('fr', localization);
 
 const Home = () => {
@@ -35,8 +27,12 @@ const Home = () => {
   const [dailyConfirmed, setDailyConfirmed] = useState();
   const [dailyDeaths, setDailyDeaths] = useState();
   const [dailyRecovered, setDailyRecovered] = useState();
-  const { Header, Footer, Sider, Content } = Layout;
+  const { Footer} = Layout;
   
+  useEffect(() => {
+    fetchCountries()
+  },[]);
+
   useEffect(() => {
     fetchStats()
     fetchDay()
@@ -45,10 +41,6 @@ const Home = () => {
   useEffect(() => {
     fetchDay()
   },[date]);
-
-  useEffect(() => {
-    fetchCountries()
-  },[]);
 
   const countryChoice = (value) => {
     setCountry(value)
@@ -72,9 +64,6 @@ const Home = () => {
         array.push(data)
     }
     array.push({"value":"global","text":"1.Global"})
-    if(array.length < 2){
-      array.push({"value":"france","text":"France"})
-    }
     setCountries(array)
     })
     .catch((error) => console.error(error));
@@ -126,7 +115,6 @@ const Home = () => {
             cumuledData["Morts"]=day.Deaths
             cumuledData["guéris"]=day.Recovered
             cumuledArray.push(cumuledData)
-
             // Data for daily chart
             let dailyData = {}
             dailyData["date"]=(moment(day.Date).format('l'))
@@ -192,20 +180,21 @@ const Home = () => {
             <Stats confirmed={confirmed} deaths={deaths} recovered={recovered} />
           </div>
           <div className="col-md-6">
-            <CumuledChart data={cumuledChartData} />
+            {country === "global" ? "" : <CumuledChart data={cumuledChartData} />}
           </div>
         </div>
-        <h3 className="text-center text-light mb-4 mt-4">{moment(date).format("DD/MM/YYYY")}</h3>
-        <DateChoice dayChoice={dayChoice} />
-        <div className="row d-flex align-items-center">
-          <div className="col-md-6">
-            <Stats confirmed={dailyConfirmed} deaths={dailyDeaths} recovered={dailyRecovered} />
+        {country === "global" ? "" : <div>
+          <h3 className="text-center text-light mb-4 mt-4">{moment(date).format("DD/MM/YYYY")}</h3>
+          <DateChoice dayChoice={dayChoice} />
+          <div className="row d-flex align-items-center">
+            <div className="col-md-6">
+              <Stats confirmed={dailyConfirmed} deaths={dailyDeaths} recovered={dailyRecovered} />
+            </div>
+            <div className="col-md-6">
+              <DailyChart data={dailyChartData} />
+            </div>
           </div>
-          <div className="col-md-6">
-            <DailyChart data={dailyChartData} />
-          </div>
-        </div>
-
+        </div>}
         </div>
         <Distancing className="mt-4" width="500" height="auto" />
       <Footer>

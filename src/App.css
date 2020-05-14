@@ -31,9 +31,26 @@ body{
   margin-top: 10em;
   border-radius: 2em;
 }
+.red:hover{
+  color: #cf1322;
+}
+.red:focus-within{
+  color: #cf1322 !important;
+  border-color: #cf1322 !important;
+}
 
-.navbar-nav.navbar-center {
-  position: absolute;
-  left: 50%;
-  transform: translatex(-50%);
+.yellow:hover{
+  color: #ef9115;
+}
+.yellow:focus-within{
+  color: #ef9115 !important;
+  border-color: #ef9115 !important;
+}
+
+.green:hover{
+  color: #3f8600;
+}
+.green:focus-within{
+  color: #3f8600 !important;
+  border-color: #3f8600 !important;
 }

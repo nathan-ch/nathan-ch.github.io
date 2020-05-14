@@ -12,7 +12,6 @@ import Home from './Pages/Home';
 import Navbar from './components/Navbar';
 import Informations from './Pages/Informations';
 import Apropos from './Pages/Apropos';
-import Country from './Pages/Country';
 import {IntlProvider} from 'react-intl'
 import messagesFr from './translation/fr'
 import messagesEn from './translation/en'
@@ -20,7 +19,7 @@ import messagesEn from './translation/en'
 const messages = {
   fr: messagesFr,
   en: messagesEn,
-}; // On créé un objet qui contient toutes nos traductions, avec un index par langue
+};
 
 
 const App = () => {
@@ -54,9 +53,6 @@ const App = () => {
       </Route>
       <Route path="/apropos">
         <Apropos />
-      </Route>
-      <Route path={`/country/:countrySlug`}>
-        <Country />
       </Route>
       <Route path="/">
         <Home />

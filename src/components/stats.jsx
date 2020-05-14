@@ -10,8 +10,8 @@ const Stats = ({confirmed, deaths, recovered}) => {
           <div className="row">
             <div className="col-md-4" >
               <Card className="radius1" style={{ width: "80%" }}>
-                {!confirmed && <Spin className="spin" />}
-                {confirmed && <Statistic
+                {!confirmed ? <Spin className="spin" /> :
+                 <Statistic
                   title={<FormattedMessage id="home.cardConfirmed" />}
                   value={confirmed}
                   precision={0}
@@ -23,8 +23,8 @@ const Stats = ({confirmed, deaths, recovered}) => {
             </div>
             <div className="col-md-4">
               <Card className="radius1" style={{ width: "80%" }}>
-                {!deaths && <Spin className="spin" />}
-                {deaths && <Statistic
+                {!deaths ? <Spin className="spin" /> : 
+                <Statistic
                   title={<FormattedMessage id="home.cardDeaths" />}
                   value={deaths}
                   precision={0}
@@ -36,8 +36,8 @@ const Stats = ({confirmed, deaths, recovered}) => {
             </div>
             <div className="col-md-4">
               <Card className="radius1" style={{ width: "80%" }}>
-                {!recovered && <Spin className="spin" />}
-                {recovered && <Statistic
+                {!recovered ? <Spin className="spin" /> :
+                <Statistic
                   title={<FormattedMessage id="home.cardRecovered" />}
                   value={recovered}
                   precision={0}

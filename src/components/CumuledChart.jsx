@@ -10,8 +10,8 @@ const CumuledChart = ({data}) => {
         <ResponsiveContainer>
           <LineChart width={200} height={300} data={data}>
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" padding={{ left: 3, right: 3 }} />
-            <YAxis />
+            <XAxis dataKey="date" stroke="#FFFFFF" padding={{ left: 3, right: 3 }} />
+            <YAxis stroke="#FFFFFF" />
             <Tooltip />
             <Legend />
             <Line type="monotone" dot={false} strokeWidth={3} label={<FormattedMessage id="home.cardConfirmed" />} dataKey="confirmés" stroke="#ef9115" />
