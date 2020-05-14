@@ -1,7 +1,7 @@
 {
     "home.title": "Covid-19 statistics",
     "home.selecCountry" : "Select a country",
-    "home.titleStatCumuled" : "Cumuled numbers",
+    "home.titleStatCumuled" : "Evolution of pandemia",
     "home.cardConfirmed" :"Confirmed",
     "home.cardDeaths" : "Deaths",
     "home.cardRecovered" : "Recovered",

@@ -31,7 +31,7 @@ const Home = () => {
   const [recovered, setRecovered] = useState();
   const [country, setCountry] = useState("france");
   const [countries, setCountries] = useState([])
-  const [date, setDate] = useState(moment().subtract(2, 'days').format("YYYY-MM-DD"))
+  const [date, setDate] = useState(moment().subtract(1, 'days').format("YYYY-MM-DD"))
   const [dailyConfirmed, setDailyConfirmed] = useState();
   const [dailyDeaths, setDailyDeaths] = useState();
   const [dailyRecovered, setDailyRecovered] = useState();
@@ -169,24 +169,24 @@ const Home = () => {
 
   return (
     <div className="text-center mx-auto" style={{maxWidth:"1800px"}}>
-      <div className="container">
+      <div className="container jumbo">
       <div className="row d-flex align-items-center">
         <div className="col-md-6">
           <h1 className="display-4 text-danger"> <FormattedMessage id="home.title" /></h1>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-6 ">
           <Research width="500" height="auto" />
         </div>
       </div>
       </div>
       <hr className="my-4" style={{width:"500px"}}></hr>
-      <div className="bg-dark pb-3 p-2 mx-auto rounded" style={{width:"20%"}}>
+      <div className="bg-dark pb-3 p-2 mx-auto rounded select" style={{width:"20%"}}>
         <h3 className="text-light"><FormattedMessage id="home.selecCountry" /></h3>
           <AllCountries countryChoice={countryChoice} data={countries} />
       </div>
       <hr className="my-4" style={{width:"500px"}}></hr>
-      <div style={{backgroundColor:"#F0F2F5"}} className="container-fluid">
-          <h4 className="text-center mb-4 text-secondary"><FormattedMessage id="home.titleStatCumuled" /></h4>
+      <div className="container-fluid dark">
+          <h3 className="text-center mb-4 text-light"><FormattedMessage id="home.titleStatCumuled" /></h3>
         <div className="row d-flex align-items-center">
           <div className="col-md-6">
             <Stats confirmed={confirmed} deaths={deaths} recovered={recovered} />
@@ -195,7 +195,7 @@ const Home = () => {
             <CumuledChart data={cumuledChartData} />
           </div>
         </div>
-        <h4 className="text-center text-secondary mb-4">Le {moment(date).format("dddd DD MMMM YYYY")}</h4>
+        <h3 className="text-center text-light mb-4 mt-4">{moment(date).format("DD/MM/YYYY")}</h3>
         <DateChoice dayChoice={dayChoice} />
         <div className="row d-flex align-items-center">
           <div className="col-md-6">

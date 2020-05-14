@@ -32,7 +32,7 @@ const App = () => {
       }
     },[]);
 
-  const changeLanguage = (e) =>{
+  const changeLanguage = () =>{
     if(language === 'fr'){
       setLanguage('en')
       localStorage.setItem('lang', 'en')

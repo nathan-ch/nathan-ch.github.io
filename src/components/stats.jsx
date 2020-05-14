@@ -9,7 +9,7 @@ const Stats = ({confirmed, deaths, recovered}) => {
     return(
           <div className="row">
             <div className="col-md-4" >
-              <Card style={{ width: "80%" }}>
+              <Card className="radius1" style={{ width: "80%" }}>
                 {!confirmed && <Spin className="spin" />}
                 {confirmed && <Statistic
                   title={<FormattedMessage id="home.cardConfirmed" />}
@@ -22,7 +22,7 @@ const Stats = ({confirmed, deaths, recovered}) => {
               </Card>
             </div>
             <div className="col-md-4">
-              <Card style={{ width: "80%" }}>
+              <Card className="radius1" style={{ width: "80%" }}>
                 {!deaths && <Spin className="spin" />}
                 {deaths && <Statistic
                   title={<FormattedMessage id="home.cardDeaths" />}
@@ -35,7 +35,7 @@ const Stats = ({confirmed, deaths, recovered}) => {
               </Card>
             </div>
             <div className="col-md-4">
-              <Card style={{ width: "80%" }}>
+              <Card className="radius1" style={{ width: "80%" }}>
                 {!recovered && <Spin className="spin" />}
                 {recovered && <Statistic
                   title={<FormattedMessage id="home.cardRecovered" />}
