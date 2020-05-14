@@ -1,6 +1,5 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import {Navbar, Nav, NavDropdown, Form, FormControl, Button} from 'react-bootstrap';
 import {
     BrowserRouter as Router,
     Route,
@@ -16,22 +15,21 @@ const NavBar = ({changeLanguage, currentLang}) => {
     return(
         <div className="container">
             <nav style={{ backgroundColor: "#F0F2F5"}} className="navbar navbar-expand-lg navbar-light ">
-            <h3><Link className="nav-link text-secondary" to="/">Stats Covid 19</Link></h3>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item active">
-                            <h4><Link className="nav-link" to="/"><FormattedMessage id="home.navTitle" /></Link></h4>
+                            <h6><Link className="nav-link" to="/"><FormattedMessage id="home.navTitle" /></Link></h6>
                         </li>
+                        {/* <li className="nav-item">
+                            <h6><Link className="nav-link" to="/informations"><FormattedMessage id="home.navInformation" /></Link></h6>
+                        </li> */}
                         <li className="nav-item">
-                            <h4><Link className="nav-link" to="/informations"><FormattedMessage id="home.navInformation" /></Link></h4>
+                            <h6><Link className="nav-link" to="/apropos"><FormattedMessage id="home.navAbout" /></Link></h6>
                         </li>
-                        <li className="nav-item">
-                            <h4><Link className="nav-link" to="/apropos"><FormattedMessage id="home.navAbout" /></Link></h4>
-                        </li>
-                        <li className="nav-Item">
+                        <li class="nav-Item">
                             <h4><a className="nav-link" onClick={changeLanguage}>{ currentLang === "en" ?  '🇫🇷' : '🇬🇧'}</a></h4>
                         </li>
                     </ul>

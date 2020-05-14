@@ -2,6 +2,7 @@
     "home.title": "Covid-19 statistics",
     "home.selecCountry" : "Select a country",
     "home.titleStatCumuled" : "Evolution of pandemia",
+    "home.titleStatDaily" : "Pick a date to see datas about one day",
     "home.cardConfirmed" :"Confirmed",
     "home.cardDeaths" : "Deaths",
     "home.cardRecovered" : "Recovered",

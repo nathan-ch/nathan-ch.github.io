@@ -168,7 +168,7 @@ const Home = () => {
       </div>
       </div>
       <hr className="my-4" style={{width:"500px"}}></hr>
-      <div className="bg-dark pb-3 p-2 mx-auto rounded select" style={{width:"20%"}}>
+      <div className="bg-dark pb-3 p-2 mx-auto rounded select" style={{width:"25%"}}>
         <h3 className="text-light"><FormattedMessage id="home.selecCountry" /></h3>
           <AllCountries countryChoice={countryChoice} data={countries} />
       </div>
@@ -184,7 +184,7 @@ const Home = () => {
           </div>
         </div>
         {country === "global" ? "" : <div>
-          <h3 className="text-center text-light mb-4 mt-4">{moment(date).format("DD/MM/YYYY")}</h3>
+          <h3 className="text-center text-light mb-4 mt-4"><FormattedMessage id="home.titleStatDaily" /> : {moment(date).format("DD/MM/YYYY")}</h3>
           <DateChoice dayChoice={dayChoice} />
           <div className="row d-flex align-items-center">
             <div className="col-md-6">
