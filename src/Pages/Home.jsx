@@ -10,8 +10,8 @@ import DateChoice from '../components/DateChoice';
 import DailyChart from '../components/DailyChart';
 import 'bootstrap/dist/css/bootstrap.css';
 import { FormattedMessage } from 'react-intl';
-import { ReactComponent as Research  } from '../images/research.svg';
 import { ReactComponent as Distancing  } from '../images/distancing.svg';
+import Jumbo from '../components/jumbo';
 
 moment.updateLocale('fr', localization);
 
@@ -157,16 +157,7 @@ const Home = () => {
 
   return (
     <div className="text-center mx-auto" style={{maxWidth:"1800px"}}>
-      <div className="container jumbo">
-      <div className="row d-flex align-items-center">
-        <div className="col-md-6">
-          <h1 className="display-4 text-danger"> <FormattedMessage id="home.title" /></h1>
-        </div>
-        <div className="col-md-6 ">
-          <Research width="500" height="auto" />
-        </div>
-      </div>
-      </div>
+      <Jumbo />
       <hr className="my-4" style={{width:"500px"}}></hr>
       <div className="bg-dark pb-3 p-2 mx-auto rounded select" style={{width:"25%"}}>
         <h3 className="text-light"><FormattedMessage id="home.selecCountry" /></h3>
@@ -176,12 +167,13 @@ const Home = () => {
       <div className="container-fluid dark">
           <h3 className="text-center mb-4 text-light"><FormattedMessage id="home.titleStatCumuled" /></h3>
         <div className="row d-flex align-items-center">
-          <div className="col-md-6">
+          <div className="col">
             <Stats confirmed={confirmed} deaths={deaths} recovered={recovered} />
           </div>
+          {country === "global" ? "" :
           <div className="col-md-6">
-            {country === "global" ? "" : <CumuledChart data={cumuledChartData} />}
-          </div>
+             : <CumuledChart data={cumuledChartData} />
+          </div>}
         </div>
         {country === "global" ? "" : <div>
           <h3 className="text-center text-light mb-4 mt-4"><FormattedMessage id="home.titleStatDaily" /> : {moment(date).format("DD/MM/YYYY")}</h3>
