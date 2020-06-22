@@ -156,12 +156,16 @@ const Home = () => {
   }
 
   return (
-    <div className="text-center mx-auto" style={{maxWidth:"1800px"}}>
+    <div className="text-center mx-auto">
       <Jumbo />
       <hr className="my-4" style={{width:"500px"}}></hr>
-      <div className="bg-dark pb-3 p-2 mx-auto rounded select" style={{width:"25%"}}>
-        <h3 className="text-light"><FormattedMessage id="home.selecCountry" /></h3>
-          <AllCountries countryChoice={countryChoice} data={countries} />
+      <div className="container">
+        <div className="row">
+          <div className="border col-md-5 col-sm-12 bg-dark pb-3 p-2 mx-auto rounded select">
+              <h3 className="text-light"><FormattedMessage id="home.selecCountry" /></h3>
+                <AllCountries countryChoice={countryChoice} data={countries} />
+          </div>
+        </div>
       </div>
       <hr className="my-4" style={{width:"500px"}}></hr>
       <div className="container-fluid dark">
@@ -188,7 +192,13 @@ const Home = () => {
           </div>
         </div>}
         </div>
-        <Distancing className="mt-4" width="500" height="auto" />
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6 col-sm-12 mx-auto">
+              <Distancing className="mt-4" width="auto" height="auto" />
+            </div>
+          </div>
+        </div>
       <Footer>
         <FormattedMessage id="home.madeBy" /> <a href="mailto:nathanchateau@gmail.com">Nathan Chateau</a> </Footer>
       </div>            

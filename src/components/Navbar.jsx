@@ -29,7 +29,7 @@ const NavBar = ({changeLanguage, currentLang}) => {
                         <li className="nav-item">
                             <h6><Link className="nav-link" to="/apropos"><FormattedMessage id="home.navAbout" /></Link></h6>
                         </li>
-                        <li class="nav-Item">
+                        <li className="nav-Item">
                             <h4><a className="nav-link" onClick={changeLanguage}>{ currentLang === "en" ?  '🇫🇷' : '🇬🇧'}</a></h4>
                         </li>
                     </ul>
